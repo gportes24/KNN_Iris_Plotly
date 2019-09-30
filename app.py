@@ -11,7 +11,7 @@ import pickle
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
-app.title='knn'
+app.title='knn flowers'
 
 ########### Read in the model and dataset ######
 file = open('resources/final_model.pkl', 'rb')
@@ -32,7 +32,7 @@ app.layout = html.Div(children=[
                     min=1,
                     max=8,
                     step=0.1,
-                    marks={i:str(i) for i in range(1, 9)},
+                    marks={i:str(i) for i in range(1, 10)},
                     value=5
                 ),
                 html.Br(),
@@ -44,7 +44,7 @@ app.layout = html.Div(children=[
                     min=0.1,
                     max=3,
                     step=0.1,
-                    marks={i:str(i) for i in range(0, 4)},
+                    marks={i:str(i) for i in range(0, 5)},
                     value=1.3,
                 ),
                 html.Br(),
@@ -60,7 +60,7 @@ app.layout = html.Div(children=[
         ], className='twelve columns'),
 
     html.Br(),
-    html.A('Code on Github', href='https://github.com/austinlasseter/knn_iris_plotly'),
+    html.A('Code on Github', href='https://github.com/gportes24/KNN_Iris_Plotly'),
     ])
 ])
 
@@ -90,7 +90,7 @@ def display_figure(val0, val1):
     neighbors=list(model.kneighbors(new_observation0)[1][0])
     df_neighbors=train.iloc[neighbors, :]
 
-    brights = ['red', 'blue', 'yellow', 'white'] # https://www.canva.com/learn/100-color-combinations/
+    brights = ['red', 'lightgreen', 'brown', 'gray'] # https://www.canva.com/learn/100-color-combinations/
 
     trace1 = go.Scatter(
         x = train['pl'],
@@ -129,7 +129,7 @@ def display_figure(val0, val1):
     data=[trace0, trace1, trace2]
 
     layout = go.Layout(
-        title = 'K-Nearest Neighbors', # Graph title
+        title = 'K-Nearest Neighbors TOP3', # Graph title
         xaxis = dict(title = 'Petal Length'), # x-axis label
         yaxis = dict(title = 'Petal Width'), # y-axis label
         hovermode ='closest' # handles multiple points landing on the same vertical
